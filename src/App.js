@@ -12,6 +12,8 @@ class App extends React.Component {
     this.state = {
       inventory: []
     };
+
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
@@ -27,7 +29,9 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <Dashboard inventory={this.state.inventory} />
-        <Form />
+        <Form
+        // componentDidMount={this.componentDidMount}
+        />
       </div>
     );
   }

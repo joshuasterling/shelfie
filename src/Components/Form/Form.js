@@ -1,13 +1,14 @@
 import React from "react";
+import axios from "axios";
 
 class Form extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      imgurl: "",
       name: "",
-      price: 0
+      price: 0,
+      imgurl: ""
     };
 
     //Preserve initial state
@@ -17,12 +18,6 @@ class Form extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.resetInputs = this.resetInputs.bind(this);
-  }
-
-  handleImageChange(event) {
-    this.setState({
-      imgurl: event.target.value
-    });
   }
 
   handleNameChange(event) {
@@ -37,9 +32,19 @@ class Form extends React.Component {
     });
   }
 
+  handleImageChange(event) {
+    this.setState({
+      imgurl: event.target.value
+    });
+  }
+
   resetInputs = () => {
     this.setState(this.baseState);
   };
+
+  // createProduct([name, price, imgurl]) {
+  //   axios.post("/api/product", { name, price, imgurl }).then();
+  // }
 
   render() {
     return (
