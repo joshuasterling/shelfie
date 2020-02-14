@@ -1,12 +1,21 @@
 import React from "react";
 
 class Product extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    return <div>Product</div>;
+    return (
+      <div className="Product">
+        <div className="product-img">IMAGE BOX</div>
+        <div className="product-box">
+          <p>{this.props.product.name}</p>
+          <p>{this.props.product.price}</p>
+          <p>{this.props.product.image}</p>
+        </div>
+      </div>
+    );
   }
 }
 

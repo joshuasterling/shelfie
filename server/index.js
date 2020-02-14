@@ -15,6 +15,10 @@ massive(CONNECTION_STRING)
 
 app.use(express.json());
 
+//ENDPOINTS
+app.get("/api/inventory", ctrl.getInventory);
+app.post("/api/product", ctrl.createProduct);
+
 app.listen(SERVER_PORT, () => {
   console.log(`Listening on port ${SERVER_PORT}.`);
 });

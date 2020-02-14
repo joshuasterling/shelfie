@@ -20,3 +20,6 @@
 -- VALUES
 -- ('Shirt', 15, 'a shirt');
 
+-- SELECT *
+-- FROM products;
+

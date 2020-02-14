@@ -1,4 +1,5 @@
 import React from "react";
+import "./Header.css";
 
 class Header extends React.Component {
   constructor() {
@@ -6,7 +7,12 @@ class Header extends React.Component {
   }
 
   render() {
-    return <div>Header</div>;
+    return (
+      <div className="App-header">
+        {/* <img src="" alt="logo" /> */}
+        <p>SHELFIE</p>
+      </div>
+    );
   }
 }
 
