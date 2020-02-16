@@ -1,9 +1,21 @@
 import React from "react";
+import axios from "axios";
 import Product from "../Product/Product";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+
+    this.deleteProduct = this.deleteProduct.bind(this);
+  }
+
+  deleteProduct(id) {
+    axios
+      .delete(`/api/product/${id}`)
+      .then(this.props.getProducts())
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -13,15 +25,12 @@ class Dashboard extends React.Component {
           inventory={this.props.inventory}
           key={index}
           product={element}
+          deleteProduct={this.deleteProduct}
+          getOne={this.props.getOne}
         />
       );
     });
-    return (
-      <div>
-        Dashboard
-        {inventoryList}
-      </div>
-    );
+    return <div>{inventoryList}</div>;
   }
 }
 

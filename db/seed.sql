@@ -23,3 +23,6 @@
 -- SELECT *
 -- FROM products;
 
+-- DELETE
+-- FROM products
+-- WHERE id = $1;

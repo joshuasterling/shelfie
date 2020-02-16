@@ -1,4 +1,5 @@
 import React from "react";
+import "./Product.css";
 
 class Product extends React.Component {
   constructor(props) {
@@ -13,6 +14,20 @@ class Product extends React.Component {
           <p>{this.props.product.name}</p>
           <p>{this.props.product.price}</p>
           <p>{this.props.product.image}</p>
+          <div>
+            <button
+              className="button"
+              onClick={() => this.props.deleteProduct(this.props.product.id)}
+            >
+              Delete
+            </button>
+            <button
+              className="button"
+              onClick={() => this.props.getOne(this.props.product.id)}
+            >
+              Edit
+            </button>
+          </div>
         </div>
       </div>
     );

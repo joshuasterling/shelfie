@@ -10,16 +10,34 @@ class App extends React.Component {
     super();
 
     this.state = {
-      inventory: []
+      inventory: [],
+      currentProduct: {}
     };
 
-    this.componentDidMount = this.componentDidMount.bind(this);
+    this.getProducts = this.getProducts.bind(this);
+    this.getOne = this.getOne.bind(this);
   }
 
   componentDidMount() {
+    this.getProducts();
+  }
+
+  componentDidUpdate() {
+    this.getProducts();
+  }
+
+  getProducts() {
     axios.get("/api/inventory").then(res => {
       this.setState({
         inventory: res.data
+      });
+    });
+  }
+
+  getOne(id) {
+    axios.get(`/api/inventory/${id}`).then(res => {
+      this.setState({
+        currentProduct: res.data
       });
     });
   }
@@ -28,9 +46,14 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Dashboard inventory={this.state.inventory} />
+        <Dashboard
+          inventory={this.state.inventory}
+          getProducts={this.getProducts}
+          getOne={this.getOne}
+        />
         <Form
-        // componentDidMount={this.componentDidMount}
+          getProducts={this.getProducts}
+          currentProduct={this.state.currentProduct}
         />
       </div>
     );

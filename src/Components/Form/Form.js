@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import "./Form.css";
 
 class Form extends React.Component {
   constructor() {
@@ -18,7 +19,10 @@ class Form extends React.Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
     this.resetInputs = this.resetInputs.bind(this);
+    this.createProduct = this.createProduct.bind(this);
   }
+
+  componentDidUpdate() {}
 
   handleNameChange(event) {
     this.setState({
@@ -42,9 +46,17 @@ class Form extends React.Component {
     this.setState(this.baseState);
   };
 
-  // createProduct([name, price, imgurl]) {
-  //   axios.post("/api/product", { name, price, imgurl }).then();
-  // }
+  createProduct() {
+    axios
+      .post("/api/product", { ...this.state })
+      .then(res => {
+        this.props.getProducts();
+        this.resetInputs();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   render() {
     return (
@@ -65,14 +77,10 @@ class Form extends React.Component {
           onChange={this.handleNameChange}
         />
         <p>Price:</p>
-        <input
-          // type="text"
-          value={this.state.price}
-          onChange={this.handlePriceChange}
-        />
+        <input value={this.state.price} onChange={this.handlePriceChange} />
         <div className="form-button-box">
-          <button onClick={this.resetInputs}>Cancel</button>
-          <button>Add to Inventory</button>
+          <button onClick={() => this.resetInputs()}>Cancel</button>
+          <button onClick={() => this.createProduct()}>Add to Inventory</button>
         </div>
       </div>
     );
