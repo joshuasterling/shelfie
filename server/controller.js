@@ -46,7 +46,33 @@ module.exports = {
     dbInstance
       .get_product(id)
       .then(product => {
-        res.status(200).send(product);
+        res.status(200).send(product[0]);
+      })
+      .catch(err => {
+        res.status(500).send(err);
+        console.log(err);
+      });
+  },
+
+  updateProduct: (req, res) => {
+    const dbInstance = req.app.get("db");
+    const { name, price, img } = req.body;
+    const { id } = req.params;
+
+    // console.log(dbInstance.products);
+    // dbInstance.products
+    //   .updateDoc(id, { name, price, img })
+    //   .then(updatedProduct => {
+    //     res.status(200).send(updatedProduct);
+    //   })
+    //   .catch(err => {
+    //     res.status(500).send(err);
+    //     console.log(err);
+    //   });
+    dbInstance
+      .update_product([id, name, price, img])
+      .then(updatedProduct => {
+        res.status(200).send(updatedProduct);
       })
       .catch(err => {
         res.status(500).send(err);

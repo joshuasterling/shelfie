@@ -22,9 +22,7 @@ class App extends React.Component {
     this.getProducts();
   }
 
-  componentDidUpdate() {
-    this.getProducts();
-  }
+  componentDidUpdate() {}
 
   getProducts() {
     axios.get("/api/inventory").then(res => {

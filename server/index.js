@@ -20,6 +20,7 @@ app.get("/api/inventory", ctrl.getInventory);
 app.post("/api/product", ctrl.createProduct);
 app.delete("/api/product/:id", ctrl.deleteProduct);
 app.get("/api/inventory/:id", ctrl.getOne);
+app.put("/api/product/:id", ctrl.updateProduct);
 
 app.listen(SERVER_PORT, () => {
   console.log(`Listening on port ${SERVER_PORT}.`);

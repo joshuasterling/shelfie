@@ -7,9 +7,10 @@ class Form extends React.Component {
     super();
 
     this.state = {
+      id: null,
       name: "",
       price: 0,
-      imgurl: ""
+      img: ""
     };
 
     //Preserve initial state
@@ -22,7 +23,16 @@ class Form extends React.Component {
     this.createProduct = this.createProduct.bind(this);
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentProduct !== this.props.currentProduct) {
+      this.setState({
+        id: this.props.currentProduct.id,
+        name: this.props.currentProduct.name,
+        price: this.props.currentProduct.price,
+        img: this.props.currentProduct.img
+      });
+    }
+  }
 
   handleNameChange(event) {
     this.setState({
@@ -38,7 +48,7 @@ class Form extends React.Component {
 
   handleImageChange(event) {
     this.setState({
-      imgurl: event.target.value
+      img: event.target.value
     });
   }
 
@@ -58,6 +68,18 @@ class Form extends React.Component {
       });
   }
 
+  updateProduct() {
+    axios
+      .put(`/api/product/${this.state.id}`, { ...this.state })
+      .then(res => {
+        this.props.getProducts();
+        this.resetInputs();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="form">
@@ -67,7 +89,7 @@ class Form extends React.Component {
         <p>Image URL:</p>
         <input
           type="text"
-          value={this.state.imgurl}
+          value={this.state.img}
           onChange={this.handleImageChange}
         />
         <p>Product Name:</p>
@@ -80,7 +102,13 @@ class Form extends React.Component {
         <input value={this.state.price} onChange={this.handlePriceChange} />
         <div className="form-button-box">
           <button onClick={() => this.resetInputs()}>Cancel</button>
-          <button onClick={() => this.createProduct()}>Add to Inventory</button>
+          {this.state.id ? (
+            <button onClick={() => this.updateProduct()}>Save Changes</button>
+          ) : (
+            <button onClick={() => this.createProduct()}>
+              Add to Inventory
+            </button>
+          )}
         </div>
       </div>
     );
