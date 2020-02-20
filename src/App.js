@@ -3,6 +3,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Form from "./Components/Form/Form";
 import Header from "./Components/Header/Header";
 import axios from "axios";
+import { HashRouter as Router, Link, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 class App extends React.Component {
@@ -42,18 +43,36 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Dashboard
-          inventory={this.state.inventory}
-          getProducts={this.getProducts}
-          getOne={this.getOne}
-        />
-        <Form
-          getProducts={this.getProducts}
-          currentProduct={this.state.currentProduct}
-        />
-      </div>
+      <Router>
+        <div className="App">
+          <Header />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <Dashboard
+                  {...props}
+                  inventory={this.state.inventory}
+                  getProducts={this.getProducts}
+                  getOne={this.getOne}
+                />
+              )}
+            />
+
+            <Route
+              path="/form"
+              render={props => (
+                <Form
+                  {...props}
+                  getProducts={this.getProducts}
+                  currentProduct={this.state.currentProduct}
+                />
+              )}
+            />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

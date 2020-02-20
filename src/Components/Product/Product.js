@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Product.css";
 
 class Product extends React.Component {
@@ -21,12 +22,14 @@ class Product extends React.Component {
             >
               Delete
             </button>
-            <button
-              className="button"
-              onClick={() => this.props.getOne(this.props.product.id)}
-            >
-              Edit
-            </button>
+            <Link to="/form">
+              <button
+                className="button"
+                onClick={() => this.props.getOne(this.props.product.id)}
+              >
+                Edit
+              </button>
+            </Link>
           </div>
         </div>
       </div>

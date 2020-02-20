@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./Form.css";
 
 class Form extends React.Component {
@@ -101,13 +102,19 @@ class Form extends React.Component {
         <p>Price:</p>
         <input value={this.state.price} onChange={this.handlePriceChange} />
         <div className="form-button-box">
-          <button onClick={() => this.resetInputs()}>Cancel</button>
+          <Link to="/">
+            <button onClick={() => this.resetInputs()}>Cancel</button>
+          </Link>
           {this.state.id ? (
-            <button onClick={() => this.updateProduct()}>Save Changes</button>
+            <Link to="/">
+              <button onClick={() => this.updateProduct()}>Save Changes</button>
+            </Link>
           ) : (
-            <button onClick={() => this.createProduct()}>
-              Add to Inventory
-            </button>
+            <Link to="/">
+              <button onClick={() => this.createProduct()}>
+                Add to Inventory
+              </button>
+            </Link>
           )}
         </div>
       </div>

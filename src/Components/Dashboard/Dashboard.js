@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
   deleteProduct(id) {
     axios
       .delete(`/api/product/${id}`)
-      .then(this.props.getProducts())
+      .then(() => this.props.getProducts())
       .catch(err => {
         console.log(err);
       });
